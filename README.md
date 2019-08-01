@@ -73,7 +73,7 @@ For more details see the file `INSTALL`
 
 ## Cross Compile and Install Instructions for Android Using NDK
 
-- Download [android_ndk_cross_compile_build_automator]() and follow its setup instructions.
+- Download [android_ndk_cross_compile_build_automator](https://github.com/agnostic-apollo/Android-NDK-Cross-Compile-Build-Automator) and read/follow its usage guide.
 
 - Copy `fuse` directory to `android_ndk_cross_compile_build_automator/packages` directory.
 
