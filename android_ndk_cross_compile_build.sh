@@ -114,7 +114,7 @@ fi
 #you can use the special ARCH_SRC file for these cases
 #currently "armeabi-android4.0.4-" is for this case and can be used possibly with the same flags as "armeabi" other than API_LEVEL
 
-#fuse is statically compiled and these flags are not to be passed, this is just a proof of concept
+#fuse are passed automatically by clang
 #if specific flags are to be added depending on ARCH_SRC
 #if ARCH_SRC is not listed in ARCH_SRC_NOT_TO_ADD_PIE_PIC_FLAGS_FOR, then add PIE/PIC flags
 if [[ ! "$ARCH_SRC_NOT_TO_ADD_PIE_PIC_FLAGS_FOR" =~ (^|[[:space:]])"$ARCH_SRC"($|[[:space:]]) ]]; then
