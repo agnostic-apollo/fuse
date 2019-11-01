@@ -92,7 +92,7 @@ sudo apt install autoconf automake libtool
 cd android_ndk_cross_compile_build_automator
 
 #build
-bash ./android_ndk_cross_compile_build_automator
+bash ./android_ndk_cross_compile_build_automator.sh
 
 ```
 
