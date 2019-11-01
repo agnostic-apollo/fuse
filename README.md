@@ -71,7 +71,7 @@ create the `configure` script.
 For more details see the file `INSTALL`
 
 
-## Cross Compile and Install Instructions for Android Using NDK
+## Cross Compile Instructions for Android Using NDK
 
 - Download [android_ndk_cross_compile_build_automator](https://github.com/agnostic-apollo/Android-NDK-Cross-Compile-Build-Automator) and read/follow its usage guide.
 
@@ -105,9 +105,30 @@ Fully static compile is not possible currently for fusermount binary using NDK s
 However the fusermount compiled with above flags is not linked with any termux libraries and should not need the export of termux lib path with LD_LIBRARY_PATH for execution. Fully static compile will probably be possible with mucl since its libc implementation has static support. A focus on only the fusermount binary is because it is required by [rclone](https://rclone.org) [mount](https://rclone.org/commands/rclone_mount) for mounting cloud drives like google drive in android with root of course. That was the motivation behind this all. 
 
 
+## Install Instructions for Termux on Android
+
+- Download release zip or copy the zip built from source to your device.
+
+- Extract the binary of your device arch or abi from the zip.
+```
+#command to find device arch
+uname -m
+
+#command to find device abi
+getprop ro.product.cpu.abi
+```
+
+- Copy the binary to `/data/data/com.termux/files/usr/bin` and then set correct ownership and permissions by running the following commands in a non-root shell. If you run them in a root shell, then binary will only be runnable in a root shell.
+```
+export scripts_path="/data/data/com.termux/files/usr/bin"; export termux_uid="$(id -u)"; export termux_gid="$(id -g)"; su -c chown $termux_uid:$termux_gid "$scripts_path/fusermount" && chmod 700 "$scripts_path/fusermount";
+```
+
+
 ## Native Compile and Install Instructions for Android on Android Using Termux
 
 ```
+#run following commands in a non-root shell
+
 #install dependencies
 pkg install build-essential git silversearcher-ag wget gettext
 
@@ -123,7 +144,6 @@ make
 #install fusermount by copying it to termux bin path and set correct ownership and permissions
 cp ./util/fusermount /data/data/com.termux/files/usr/bin
 export scripts_path="/data/data/com.termux/files/usr/bin"; export termux_uid="$(id -u)"; export termux_gid="$(id -g)"; su -c chown $termux_uid:$termux_gid "$scripts_path/fusermount" && chmod 700 "$scripts_path/fusermount";
-
 ```
 
 Fully static compile is not possible currently for fusermount binary using termux since termux clang does not support static compilations and even if that were possible, fusermount would most likely still link dynamically with android system libc.so and/or libdl.so.
